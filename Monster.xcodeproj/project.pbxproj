@@ -19,6 +19,7 @@
 		88B470B91D34225700B1714D /* death.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88B470B41D34225700B1714D /* death.wav */; };
 		88B470BA1D34225700B1714D /* heart.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88B470B51D34225700B1714D /* heart.wav */; };
 		88B470BB1D34225700B1714D /* skull.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88B470B61D34225700B1714D /* skull.wav */; };
+		88B470BD1D3432B800B1714D /* Minecraft.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88B470BC1D3432B800B1714D /* Minecraft.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		88B470B41D34225700B1714D /* death.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = death.wav; sourceTree = "<group>"; };
 		88B470B51D34225700B1714D /* heart.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = heart.wav; sourceTree = "<group>"; };
 		88B470B61D34225700B1714D /* skull.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = skull.wav; sourceTree = "<group>"; };
+		88B470BC1D3432B800B1714D /* Minecraft.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Minecraft.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		88B4709B1D33D77B00B1714D /* Monster */ = {
 			isa = PBXGroup;
 			children = (
+				88B470BC1D3432B800B1714D /* Minecraft.ttf */,
 				88B470B21D34225700B1714D /* cave-music.mp3 */,
 				88B470B31D34225700B1714D /* bite.wav */,
 				88B470B41D34225700B1714D /* death.wav */,
@@ -146,6 +149,7 @@
 				88B470BB1D34225700B1714D /* skull.wav in Resources */,
 				88B470B81D34225700B1714D /* bite.wav in Resources */,
 				88B470B91D34225700B1714D /* death.wav in Resources */,
+				88B470BD1D3432B800B1714D /* Minecraft.ttf in Resources */,
 				88B470BA1D34225700B1714D /* heart.wav in Resources */,
 				88B470A71D33D77B00B1714D /* LaunchScreen.storyboard in Resources */,
 				88B470B71D34225700B1714D /* cave-music.mp3 in Resources */,

@@ -11,13 +11,18 @@ import AVFoundation
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var initialView: UIView!
+    
     @IBOutlet weak var monsterImg: MonsterImg!
     @IBOutlet weak var foodImg: DragImg!
     @IBOutlet weak var heartImg: DragImg!
-    
+    @IBOutlet weak var icecreamImg: DragImg!
+   
+    @IBOutlet weak var restartBtn: UIButton!
     @IBOutlet weak var penalty1Img: UIImageView!
     @IBOutlet weak var penalty2Img: UIImageView!
     @IBOutlet weak var penalty3Img: UIImageView!
+    @IBOutlet weak var background: UIImageView!
     
     let DIM_ALPHA: CGFloat = 0.2
     let OPAQUE: CGFloat = 1.0
@@ -38,12 +43,26 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        disableRestartButton()
+        
         foodImg.dropTarget = monsterImg
         heartImg.dropTarget = monsterImg
+        icecreamImg.dropTarget = monsterImg
         
         penalty1Img.alpha = DIM_ALPHA
         penalty2Img.alpha = DIM_ALPHA
         penalty3Img.alpha = DIM_ALPHA
+        
+        let monsterInt = monsterImg.monsterType
+        
+        if (monsterInt == 0 ) {
+            // Mole
+        } else {
+            // Golem
+            background.image = UIImage(named: "golemBg.png")
+        }
+        
+        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.itemDroppedOnCharacter(_:)), name: "onTargetDropped", object: nil)
         
@@ -78,6 +97,8 @@ class ViewController: UIViewController {
         
         foodImg.alpha = DIM_ALPHA
         heartImg.alpha = DIM_ALPHA
+        icecreamImg.alpha = DIM_ALPHA
+        icecreamImg.userInteractionEnabled = false
         foodImg.userInteractionEnabled = false
         heartImg.userInteractionEnabled = false
         
@@ -120,23 +141,37 @@ class ViewController: UIViewController {
             
             if penalties >= MAX_PENALTIES {
                 gameOver()
+                return
             }
         }
         
-        let rand = arc4random_uniform(2) // Can only get 0 or 1
+        let rand = arc4random_uniform(3) // Can only get 0 or 1 or 2
         
         if rand == 0 {
             foodImg.alpha = DIM_ALPHA
             foodImg.userInteractionEnabled = false
+            icecreamImg.alpha = DIM_ALPHA
+            icecreamImg.userInteractionEnabled = false
             
             heartImg.alpha = OPAQUE
             heartImg.userInteractionEnabled = true
-        } else {
+        } else if rand == 1 {
             heartImg.alpha = DIM_ALPHA
             heartImg.userInteractionEnabled = false
+            icecreamImg.alpha = DIM_ALPHA
+            icecreamImg.userInteractionEnabled = false
             
             foodImg.alpha = OPAQUE
             foodImg.userInteractionEnabled = true
+        } else {
+            foodImg.alpha = DIM_ALPHA
+            foodImg.userInteractionEnabled = false
+            heartImg.alpha = DIM_ALPHA
+            heartImg.userInteractionEnabled = false
+            
+            icecreamImg.alpha = OPAQUE
+            icecreamImg.userInteractionEnabled = true
+            
         }
         
         currentItem = rand
@@ -147,6 +182,51 @@ class ViewController: UIViewController {
         timer.invalidate()
         monsterImg.playDeathAnimation()
         sfxDeath.play()
+        
+        foodImg.alpha = DIM_ALPHA
+        icecreamImg.alpha = DIM_ALPHA
+        heartImg.alpha = DIM_ALPHA
+        foodImg.userInteractionEnabled = false
+        icecreamImg.userInteractionEnabled = false
+        heartImg.userInteractionEnabled = false
+        
+        enableRestartButton()
+    }
+    
+    
+    @IBAction func restartBtnPressed(sender: UIButton) {
+        disableRestartButton()
+        restartGame();
+    }
+    
+    func restartGame() {
+        penalties = 0
+        monsterHappy = false
+        heartImg.alpha = OPAQUE
+        heartImg.userInteractionEnabled = true
+        icecreamImg.alpha = OPAQUE
+        icecreamImg.userInteractionEnabled = true
+        foodImg.alpha = OPAQUE
+        foodImg.userInteractionEnabled = true
+        
+        penalty1Img.alpha = DIM_ALPHA
+        penalty2Img.alpha = DIM_ALPHA
+        penalty3Img.alpha = DIM_ALPHA
+        
+        monsterImg.playIdleAnimation()
+        
+        startTimer()
+        
+    }
+    
+    func enableRestartButton() {
+        restartBtn.hidden = false
+        restartBtn.enabled = true
+    }
+    
+    func disableRestartButton() {
+        restartBtn.hidden = true
+        restartBtn.enabled = false
     }
     
     
